@@ -1,0 +1,19 @@
+name: hello
+
+topology:
+  nodes:
+    frr1:
+      kind: linux
+      image: quay.io/frrouting/frr:10.0.1
+      binds:
+        - frr1/daemons:/etc/frr/daemons
+        - frr1/frr.conf:/etc/frr/frr.conf
+    frr2:
+      kind: linux
+      image: quay.io/frrouting/frr:10.0.1
+      binds:
+        - frr2/daemons:/etc/frr/daemons
+        - frr2/frr.conf:/etc/frr/frr.conf
+
+  links:
+    - endpoints: ["frr1:eth1", "frr2:eth1"]
